@@ -40,7 +40,7 @@ footer{padding:30px 0 50px;text-align:center;color:var(--mute);font-size:.82rem}
 </div>
 <script>
 // ▼ 본인 저장소로 수정: https://raw.githubusercontent.com/아이디/저장소/status-data/status.json
-const URL_JSON = "https://raw.githubusercontent.com/Kminseo1203/botstatus/status-data/status.json";
+const URL_JSON = "https://raw.githubusercontent.com/OWNER/REPO/status-data/status.json";
 const TZ = 9 * 36e5, DAY = 864e5, $ = id => document.getElementById(id);
 const COMPS = [["gateway","디스코드 연결",2],["commands","명령어 처리",3],["music","음악 재생",4]];
 const ST = {operational:"정상 작동 중", degraded:"성능 저하", down:"장애 발생"};
@@ -52,7 +52,7 @@ async function load() {
   try {
     const r = await fetch(URL_JSON + "?t=" + Date.now(), {cache:"no-store"}); if (!r.ok) throw 0;
     const j = await r.json(), now = Date.now(), age = (now - j.updated) / 1000;
-    const alive = j.online && age < j.interval * 3 + 30, state = alive ? j.state : "down", today = Math.floor((now + TZ) / DAY);
+    const alive = j.online && age < j.interval * 2.2 + 15, state = alive ? j.state : "down", today = Math.floor((now + TZ) / DAY);
     $("app").className = "wrap " + state; $("banner").textContent = BANNER[state];
     $("name").textContent = j.bot?.name || "봇 상태"; if (j.bot?.avatar) { $("av").src = j.bot.avatar; $("av").hidden = false; }
     const days = Object.fromEntries(j.days.map(d => [d[0], d]));
@@ -79,10 +79,10 @@ async function load() {
       }).join("") : `<div class="none">이 날 보고된 사고가 없습니다.</div>`;
       return `<div class="day"><h4>${dayLabel(k)}</h4>${body}</div>`;
     }).join("");
-    $("foot").textContent = `마지막 신호 ${age < 90 ? "방금 전" : dur(age) + " 전"} · 30초마다 자동 갱신`;
+    $("foot").textContent = `마지막 신호 ${age < 90 ? "방금 전" : dur(age) + " 전"} · 10초마다 자동 갱신`;
   } catch { $("app").className = "wrap"; $("banner").textContent = "상태를 불러올 수 없어요"; }
 }
-load(); setInterval(load, 30000);
+load(); setInterval(load, 10000);
 </script>
 </body>
 </html>
