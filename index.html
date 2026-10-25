@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>봇 상태</title>
+<style>
+:root{--bg:#fff;--fg:#333;--mute:#8a94a3;--line:#e0e6ed;--card:#fff;--g:#2fcc66;--y:#f1c40f;--o:#e67e22;--r:#e74c3c;--n:#e0e6ed;--top:#23272a}
+@media(prefers-color-scheme:dark){:root{--bg:#16181d;--fg:#e6e8ec;--line:#2c3038;--card:#1d2026;--n:#343942;--top:#0d0e11}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Noto Sans KR",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+.top{background:var(--top);color:#fff;padding:18px 0}.top .wrap{display:flex;align-items:center;gap:12px}
+.top img{width:36px;height:36px;border-radius:50%;background:#8884}.top b{font-size:1.15rem}
+.banner{margin:24px 0;padding:18px 22px;border-radius:6px;color:#fff;font-size:1.1rem;font-weight:600;background:var(--n);color:#555}
+.operational .banner{background:var(--g);color:#fff}.degraded .banner{background:var(--o);color:#fff}.down .banner{background:var(--r);color:#fff}
+.card{border:1px solid var(--line);border-radius:6px;background:var(--card);margin-bottom:28px}
+.card>h2{margin:0;padding:14px 20px;font-size:.95rem;border-bottom:1px solid var(--line)}
+.comp{padding:18px 20px;border-bottom:1px solid var(--line)}.comp:last-child{border:0}
+.row{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:600}
+.st{font-weight:500}.st.operational{color:var(--g)}.st.degraded{color:var(--o)}.st.down{color:var(--r)}
+.bars{display:flex;gap:2px;height:34px}.bars i{flex:1;border-radius:2px;background:var(--n)}
+.g{background:var(--g)!important}.y{background:var(--y)!important}.o{background:var(--o)!important}.r{background:var(--r)!important}
+.axis{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:.78rem;color:var(--mute)}.axis hr{flex:1;border:0;border-top:1px solid var(--line)}
+dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin:0}dl div{padding:16px 20px;border-right:1px solid var(--line)}
+dt{font-size:.78rem;color:var(--mute)}dd{margin:2px 0 0;font-size:1.25rem;font-weight:600}
+h3{margin:0 0 14px;font-size:1.3rem}.day{border-top:1px solid var(--line);padding:14px 0 20px}.day h4{margin:0 0 8px;font-size:1rem}
+.none{color:var(--mute);font-size:.9rem}.inc{margin:8px 0 12px}.inc b{font-size:1.05rem}
+.inc.degraded b{color:var(--o)}.inc.down b{color:var(--r)}.inc p{margin:4px 0;font-size:.9rem}
+footer{padding:30px 0 50px;text-align:center;color:var(--mute);font-size:.82rem}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><img id="av" alt="" hidden><b id="name">봇 상태</b></div></div>
+<div class="wrap" id="app">
+  <div class="banner" id="banner">확인 중…</div>
+  <section class="card"><h2>시스템 상태</h2><div id="comps"></div></section>
+  <section class="card"><h2>시스템 지표</h2><dl id="stats"></dl></section>
+  <h3>지난 사고</h3><div id="inc"></div>
+  <footer id="foot"></footer>
+</div>
+<script>
+// ▼ 본인 저장소로 수정: https://raw.githubusercontent.com/아이디/저장소/status-data/status.json
+const URL_JSON = "https://raw.githubusercontent.com/OWNER/REPO/status-data/status.json";
+const TZ = 9 * 36e5, DAY = 864e5, $ = id => document.getElementById(id);
+const COMPS = [["gateway","디스코드 연결",2],["commands","명령어 처리",3],["music","음악 재생",4]];
+const ST = {operational:"정상 작동 중", degraded:"성능 저하", down:"장애 발생"};
+const BANNER = {operational:"모든 시스템이 정상 작동 중입니다", degraded:"일부 시스템에 문제가 있습니다", down:"봇이 오프라인이거나 주요 장애가 발생했습니다"};
+const dur = s => { s = Math.max(0, s|0); const d = s/86400|0, h = s%86400/3600|0, m = s%3600/60|0; return d ? `${d}일 ${h}시간` : h ? `${h}시간 ${m}분` : `${m}분`; };
+const kst = t => { const d = new Date(t + TZ); return `${d.getUTCHours()}:${String(d.getUTCMinutes()).padStart(2,"0")}`; };
+const dayLabel = k => { const d = new Date(k * DAY); return `${d.getUTCFullYear()}년 ${d.getUTCMonth()+1}월 ${d.getUTCDate()}일`; };
+async function load() {
+  try {
+    const r = await fetch(URL_JSON + "?t=" + Date.now(), {cache:"no-store"}); if (!r.ok) throw 0;
+    const j = await r.json(), now = Date.now(), age = (now - j.updated) / 1000;
+    const alive = j.online && age < j.interval * 3 + 30, state = alive ? j.state : "down", today = Math.floor((now + TZ) / DAY);
+    $("app").className = "wrap " + state; $("banner").textContent = BANNER[state];
+    $("name").textContent = j.bot?.name || "봇 상태"; if (j.bot?.avatar) { $("av").src = j.bot.avatar; $("av").hidden = false; }
+    const days = Object.fromEntries(j.days.map(d => [d[0], d]));
+    $("comps").innerHTML = COMPS.map(([key, name, ix]) => {
+      let up = 0, ex = 0;
+      const bars = Array.from({length: 90}, (_, i) => {
+        const k = today - 89 + i, ds = k * DAY - TZ, lo = Math.max(ds, j.since || ds), hi = Math.min(ds + DAY, j.updated), e = (hi - lo) / 1000 / j.interval, d = days[k];
+        if (e < 2) return `<i title="${dayLabel(k)} · 데이터 없음"></i>`;
+        const u = Math.min(e, Math.max(0, (d ? d[1] - d[ix] : 0))), p = u / e * 100; up += u; ex += e;
+        return `<i class="${p >= 99 ? "g" : p >= 95 ? "y" : p >= 80 ? "o" : "r"}" title="${dayLabel(k)} · 가동률 ${p.toFixed(2)}%"></i>`;
+      }).join("");
+      const c = alive ? j.components[key] : "down";
+      return `<div class="comp"><div class="row"><span>${name}</span><span class="st ${c}">${ST[c]}</span></div><div class="bars">${bars}</div>
+      <div class="axis"><span>90일 전</span><hr><span>${ex ? Math.min(100, up / ex * 100).toFixed(2) + "% 가동" : "데이터 없음"}</span><hr><span>오늘</span></div></div>`;
+    }).join("");
+    const m = (k, v) => `<div><dt>${k}</dt><dd>${v}</dd></div>`;
+    $("stats").innerHTML = alive ? m("가동 시간", dur((now - j.startedAt) / 1000)) + m("응답 속도", j.ping >= 0 ? j.ping + "ms" : "-") + m("서버", j.guilds) + m("멤버", j.members.toLocaleString()) + m("음악 재생 중", j.playing + "곳") + m("메모리", j.memMB + "MB") + m("오류 / 명령어", `${j.errs} / ${j.cmds}`) : m("상태", "오프라인");
+    const incs = [...j.incidents]; if (!alive) incs.push({start: j.updated, end: null, impact: "down", offline: true, comps: ["gateway"]});
+    $("inc").innerHTML = Array.from({length: 14}, (_, i) => {
+      const k = today - i, list = incs.filter(x => Math.floor((x.start + TZ) / DAY) === k).sort((a, b) => b.start - a.start);
+      const body = list.length ? list.map(x => {
+        const names = x.comps.map(c => COMPS.find(q => q[0] === c)?.[1]).filter(Boolean).join(", ");
+        return `<div class="inc ${x.impact}"><b>${x.offline ? "봇 오프라인" : names + " 문제"}</b><p>${x.end ? `<b style="color:var(--g)">해결됨</b> · ${kst(x.start)} ~ ${kst(x.end)} (${dur((x.end - x.start) / 1000)})` : `<b>진행 중</b> · ${kst(x.start)}부터`}</p></div>`;
+      }).join("") : `<div class="none">이 날 보고된 사고가 없습니다.</div>`;
+      return `<div class="day"><h4>${dayLabel(k)}</h4>${body}</div>`;
+    }).join("");
+    $("foot").textContent = `마지막 신호 ${age < 90 ? "방금 전" : dur(age) + " 전"} · 30초마다 자동 갱신`;
+  } catch { $("app").className = "wrap"; $("banner").textContent = "상태를 불러올 수 없어요"; }
+}
+load(); setInterval(load, 30000);
+</script>
+</body>
+</html>
