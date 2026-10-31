@@ -1,0 +1,154 @@
+{
+ "online": true,
+ "state": "operational",
+ "components": {
+  "gateway": "operational",
+  "commands": "operational",
+  "music": "operational"
+ },
+ "updated": 1793454065951,
+ "startedAt": 1793099244890,
+ "interval": 30,
+ "ping": 191,
+ "guilds": 1,
+ "members": 15,
+ "voice": 1,
+ "playing": 1,
+ "memMB": 87,
+ "node": "v22.23.4",
+ "cmds": 59,
+ "errs": 0,
+ "lastErr": null,
+ "musicOk": 1793454061124,
+ "musicErr": 1793354191757,
+ "since": 1792894494814,
+ "days": [
+  [
+   20751,
+   1533,
+   0,
+   5,
+   7
+  ],
+  [
+   20752,
+   2907,
+   0,
+   0,
+   2
+  ],
+  [
+   20753,
+   2926,
+   0,
+   0,
+   2
+  ],
+  [
+   20754,
+   2906,
+   0,
+   0,
+   0
+  ],
+  [
+   20755,
+   2904,
+   0,
+   0,
+   1
+  ],
+  [
+   20756,
+   2942,
+   0,
+   0,
+   7
+  ],
+  [
+   20757,
+   2762,
+   0,
+   0,
+   0
+  ]
+ ],
+ "incidents": [
+  {
+   "id": "mvn7b76o",
+   "start": 1792894864416,
+   "end": 1792895033093,
+   "impact": "degraded",
+   "comps": [
+    "commands"
+   ]
+  },
+  {
+   "id": "mvn7g3nb",
+   "start": 1792895093111,
+   "end": 1792895461763,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvo13r8o",
+   "start": 1792944905640,
+   "end": 1792944932643,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvqks3iz",
+   "start": 1793098886363,
+   "end": 1793098904365,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvtj4t90",
+   "start": 1793277518868,
+   "end": 1793277527871,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvuoemad",
+   "start": 1793346840661,
+   "end": 1793346888669,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvusltw4",
+   "start": 1793353895572,
+   "end": 1793353915636,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvuss6cm",
+   "start": 1793354191654,
+   "end": 1793354215657,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  }
+ ],
+ "bot": {
+  "name": "민서의노예1호",
+  "avatar": "https://cdn.discordapp.com/avatars/1563760649878904873/7708b93ac8a65cc994659c9614b265fb.webp?size=128"
+ }
+}
