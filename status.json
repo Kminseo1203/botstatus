@@ -1,0 +1,287 @@
+{
+ "online": true,
+ "state": "operational",
+ "components": {
+  "gateway": "operational",
+  "commands": "operational",
+  "music": "operational"
+ },
+ "updated": 1794051949488,
+ "startedAt": 1793545322728,
+ "interval": 30,
+ "ping": 190,
+ "guilds": 1,
+ "members": 15,
+ "voice": 0,
+ "playing": 0,
+ "memMB": 101,
+ "node": "v22.23.4",
+ "cmds": 68,
+ "errs": 0,
+ "lastErr": null,
+ "musicOk": 1794051893197,
+ "musicErr": 1793976035526,
+ "since": 1792894494814,
+ "days": [
+  [
+   20751,
+   1533,
+   0,
+   5,
+   7
+  ],
+  [
+   20752,
+   2907,
+   0,
+   0,
+   2
+  ],
+  [
+   20753,
+   2926,
+   0,
+   0,
+   2
+  ],
+  [
+   20754,
+   2906,
+   0,
+   0,
+   0
+  ],
+  [
+   20755,
+   2904,
+   0,
+   0,
+   1
+  ],
+  [
+   20756,
+   2942,
+   0,
+   0,
+   7
+  ],
+  [
+   20757,
+   2922,
+   0,
+   0,
+   0
+  ],
+  [
+   20758,
+   1908,
+   6,
+   0,
+   2
+  ],
+  [
+   20759,
+   2897,
+   0,
+   0,
+   0
+  ],
+  [
+   20760,
+   2918,
+   0,
+   0,
+   1
+  ],
+  [
+   20761,
+   2926,
+   0,
+   0,
+   0
+  ],
+  [
+   20762,
+   2921,
+   0,
+   0,
+   0
+  ],
+  [
+   20763,
+   2931,
+   13,
+   0,
+   11
+  ],
+  [
+   20764,
+   2527,
+   0,
+   0,
+   0
+  ]
+ ],
+ "incidents": [
+  {
+   "id": "mvn7b76o",
+   "start": 1792894864416,
+   "end": 1792895033093,
+   "impact": "degraded",
+   "comps": [
+    "commands"
+   ]
+  },
+  {
+   "id": "mvn7g3nb",
+   "start": 1792895093111,
+   "end": 1792895461763,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvo13r8o",
+   "start": 1792944905640,
+   "end": 1792944932643,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvqks3iz",
+   "start": 1793098886363,
+   "end": 1793098904365,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvtj4t90",
+   "start": 1793277518868,
+   "end": 1793277527871,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvuoemad",
+   "start": 1793346840661,
+   "end": 1793346888669,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvusltw4",
+   "start": 1793353895572,
+   "end": 1793353915636,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvuss6cm",
+   "start": 1793354191654,
+   "end": 1793354215657,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "omvx6nvw7",
+   "start": 1793467836346,
+   "end": 1793498438455,
+   "impact": "down",
+   "comps": [
+    "gateway",
+    "commands",
+    "music"
+   ],
+   "offline": true
+  },
+  {
+   "id": "mvxn9p3o",
+   "start": 1793526329940,
+   "end": 1793526336647,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mvxy88qv",
+   "start": 1793544737863,
+   "end": 1793544860056,
+   "impact": "degraded",
+   "comps": [
+    "gateway"
+   ]
+  },
+  {
+   "id": "mvzigbvx",
+   "start": 1793639173677,
+   "end": 1793639176677,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mw3oq2hp",
+   "start": 1793891570461,
+   "end": 1793891603465,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mw3oz4w4",
+   "start": 1793891993476,
+   "end": 1793892293500,
+   "impact": "degraded",
+   "comps": [
+    "gateway"
+   ]
+  },
+  {
+   "id": "mw52w4zx",
+   "start": 1793975834445,
+   "end": 1793975867663,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mw52x1eq",
+   "start": 1793975876450,
+   "end": 1793975927692,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  },
+  {
+   "id": "mw530ifs",
+   "start": 1793976038488,
+   "end": 1793976047652,
+   "impact": "degraded",
+   "comps": [
+    "music"
+   ]
+  }
+ ],
+ "bot": {
+  "name": "민서의노예1호",
+  "avatar": "https://cdn.discordapp.com/avatars/1563760649878904873/7708b93ac8a65cc994659c9614b265fb.webp?size=128"
+ }
+}
