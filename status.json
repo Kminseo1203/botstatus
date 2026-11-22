@@ -1,0 +1,67 @@
+{
+ "online": true,
+ "state": "operational",
+ "components": {
+  "gateway": "operational",
+  "commands": "operational",
+  "music": "operational"
+ },
+ "updated": 1795318035743,
+ "startedAt": 1795262173019,
+ "interval": 30,
+ "ping": 191,
+ "guilds": 1,
+ "members": 25,
+ "voice": 0,
+ "playing": 0,
+ "memMB": 114,
+ "node": "v22.23.4",
+ "cmds": 3,
+ "errs": 0,
+ "lastErr": null,
+ "musicOk": 1795317979927,
+ "musicErr": null,
+ "since": 1794971462314,
+ "days": [
+  [
+   20775,
+   1430,
+   0,
+   0,
+   0
+  ],
+  [
+   20776,
+   2900,
+   0,
+   0,
+   0
+  ],
+  [
+   20777,
+   2912,
+   0,
+   0,
+   0
+  ],
+  [
+   20778,
+   2916,
+   0,
+   0,
+   0
+  ],
+  [
+   20779,
+   1506,
+   0,
+   0,
+   0
+  ]
+ ],
+ "incidents": [],
+ "bot": {
+  "name": "민서의노예1호",
+  "avatar": "https://cdn.discordapp.com/avatars/1563760649878904873/7708b93ac8a65cc994659c9614b265fb.webp?size=128"
+ }
+}
